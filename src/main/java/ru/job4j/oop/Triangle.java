@@ -17,7 +17,16 @@ public class Triangle {
 
 
     public boolean exist(double ab, double ac, double bc) {
-        return true;
+        if ((ab + ac) > bc) {
+            return true;
+        }
+        if ((ac + bc) > ab) {
+            return true;
+        }
+        if ((ab + bc) > ac) {
+            return true;
+        }
+        return false;
     }
 
     public double area() {
