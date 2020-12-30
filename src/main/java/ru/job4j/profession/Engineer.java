@@ -11,4 +11,5 @@ public class Engineer extends Profession {
     public void calculatoin(Customer customer) {
         System.out.println("Стоимость работ составит ...");
     }
+
 }

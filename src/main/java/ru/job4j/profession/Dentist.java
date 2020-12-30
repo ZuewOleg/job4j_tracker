@@ -8,4 +8,5 @@ public class Dentist extends Doctor {
     public void crows(Dentist crows) {
         System.out.println("Вам золотые или металлокерамику?");
     }
+
 }

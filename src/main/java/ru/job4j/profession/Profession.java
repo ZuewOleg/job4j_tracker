@@ -14,10 +14,4 @@ public class Profession {
 
     public String getBirthday() {}
 
-    public static void main(String[] args) {
-        Dentist dentis = new Dentist();
-        Builder builder = new Builder();
-        dentis.diagnosis();
-        builder.build();
-    }
 }

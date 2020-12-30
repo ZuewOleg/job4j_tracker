@@ -6,4 +6,5 @@ public class Programmer extends Engineer {
     public void Estimate(Customer customer) {
         System.out.println("Сделаем сметный расчет");
     }
+
 }

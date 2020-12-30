@@ -8,4 +8,5 @@ public class Surgeon extends Doctor {
      public void operation(Pacient pacient) {
          System.out.println("Сестра зажим!!!");
      }
+
 }

@@ -11,5 +11,4 @@ public class Doctor extends Profession {
     public void diagnosis(Pacient pacient) {
         System.out.println("Вы здоровы, с Вас 5000 у.е.");
     }
-
 }
