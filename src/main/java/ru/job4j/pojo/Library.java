@@ -29,8 +29,9 @@ public class Library {
         System.out.println("3. Добавьте цикл с выводом книг с именем \"Clean code\"");
         for (int index = 0; index < books.length; index++) {
             Book pr = books[index];
-            if (pr.equals(first)) {
+            if (pr.equals(books[3])) {
                 System.out.println(pr.getName());
+                break;
             }
         }
     }
