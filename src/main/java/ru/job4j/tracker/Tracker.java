@@ -60,7 +60,7 @@ public class Tracker {
 
     public boolean delete(int id) {
         int index = indexOf(id);
-        boolean rsl = items[index].getId() == id;
+        boolean rsl = index != -1;
         if (rsl) {
             System.arraycopy(items, index + 1, items, index, size - index);
             items[size - 1] = null;
