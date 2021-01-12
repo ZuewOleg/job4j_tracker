@@ -17,18 +17,18 @@ public class Tracker {
         return Arrays.copyOf(items, size);
     }
 
-        public Item[] findByName(String key) {
-            Item[] keysWithoutNull = new Item[size];
-            int a = 0;
-            for (int index = 0; index < size; index++) {
-                Item item = items[index];
-                if (item.getName().equals(key)) {
-                    keysWithoutNull[a] = item;
-                    a++;
-                }
+    public Item[] findByName(String key) {
+        Item[] keysWithoutNull = new Item[size];
+        int a = 0;
+        for (int index = 0; index < size; index++) {
+            Item item = items[index];
+            if (item.getName().equals(key)) {
+                keysWithoutNull[a] = item;
+                a++;
             }
-            return Arrays.copyOf(keysWithoutNull, a);
-            }
+        }
+        return Arrays.copyOf(keysWithoutNull, a);
+    }
 
     public Item findById(int id) {
         /* Находим индекс */
@@ -60,12 +60,12 @@ public class Tracker {
 
     public boolean delete(int id) {
         int index = indexOf(id);
-            boolean rsl = items[index].getId() == id;
-            if (rsl) {
-                System.arraycopy(items, index + 1, items, index, size - index);
-                items[size - 1] = null;
-                size--;
-            }
-            return rsl;
+        boolean rsl = items[index].getId() == id;
+        if (rsl) {
+            System.arraycopy(items, index + 1, items, index, size - index);
+            items[size - 1] = null;
+            size--;
         }
+        return rsl;
+    }
 }
