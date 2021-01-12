@@ -59,7 +59,7 @@ public class Tracker {
     }
 
     public boolean delete(int id) {
-        for (int index = 0; index < size; index++) {
+        int index = indexOf(id);
             boolean rsl = items[index].getId() == id;
             if (rsl) {
                 System.arraycopy(items, index + 1, items, index, size - index);
@@ -67,7 +67,5 @@ public class Tracker {
                 size--;
             }
             return rsl;
-        }
-        return false;
         }
 }
