@@ -27,7 +27,7 @@ public class Tracker {
                     a++;
                 }
             }
-            return Arrays.copyOf(keysWithoutNull, size);
+            return Arrays.copyOf(keysWithoutNull, a);
             }
 
     public Item findById(int id) {
