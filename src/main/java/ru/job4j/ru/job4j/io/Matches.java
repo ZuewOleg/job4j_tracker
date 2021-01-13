@@ -37,22 +37,19 @@ public class Matches {
                             match = match - user;
                         }
                         System.out.println("Осталось спичек: " + match);
-                        if (match <= 0) {
-                            if (!player) {
-                                System.out.println("Победил первый игрок");
-                                break;
-                            } else {
-                                System.out.println("Победил второй игрок");
-                                break;
-                            }
-                        }
                     }
-                            if (match == 0) {
-                                System.out.println("Сыграем еще раз?");
-                                game = false;
-                            }
+                    if (match <= 0) {
+                        if (!player) {
+                            System.out.println("Победил первый игрок");
+                            break;
+                        } else {
+                            System.out.println("Победил второй игрок");
+                            break;
                         }
                     }
                 }
             }
         }
+    }
+}
+
