@@ -23,31 +23,36 @@ public class Matches {
             } else if (select == 2) {
                 boolean game = true;
                 while (game) {
-                    int  match = 11;
+                    int match = 11;
+                    boolean player = true;
                     while (match > 0) {
-                        System.out.println("Ход первого игрока. Можно взять от 1 до 3 спичек");
-                        int player1 = Integer.valueOf(input.nextLine());
-                            match = match - player1;
-                            System.out.println("Осталось спичек: " + match);
-                            if (match == 0) {
+                        String name = player ? "первого" : "второго";
+                        System.out.println("Можно взять от 1 до 3 спичек." + " Ход " + name + " игрока!");
+                        int user = Integer.valueOf(input.nextLine());
+                        player = !player;
+                        if (user < 1 || user > 3) {
+                            System.out.println("Можно взять только одну, две или три спички");
+                            continue;
+                        } else {
+                            match = match - user;
+                        }
+                        System.out.println("Осталось спичек: " + match);
+                        if (match <= 0) {
+                            if (!player) {
                                 System.out.println("Победил первый игрок");
                                 break;
-                            }
-                        System.out.println("Ход второго игрока. Можно взять от 1 до 3 спичек");
-                        int player2 = Integer.valueOf(input.nextLine());
-                            match = match - player2;
-                            System.out.println("Осталось спичек: " + match);
-                            if (match == 0) {
+                            } else {
                                 System.out.println("Победил второй игрок");
                                 break;
                             }
+                        }
                     }
-                    if (match == 0) {
-                        System.out.println("Сыграем еще раз?");
-                        game = false;
+                            if (match == 0) {
+                                System.out.println("Сыграем еще раз?");
+                                game = false;
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-}
