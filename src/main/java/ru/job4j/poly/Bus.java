@@ -4,18 +4,15 @@ public class Bus implements Transport {
     @Override
     public boolean go() {
         return true;
-
     }
 
     @Override
     public int passengers() {
-        int passengers = 28;
-        return passengers;
+        return 28;
     }
 
     @Override
     public int fuel(int price) {
-        price = 44;
-        return price;
+        return 44;
     }
 }
