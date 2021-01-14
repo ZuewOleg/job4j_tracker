@@ -21,13 +21,8 @@ public class Matches {
                 }
                 System.out.println("Осталось спичек: " + match);
             }
-        if (!player) {
-            System.out.println("! ! ! Победил первый игрок ! ! !");
-            player = false;
-        } else {
-            System.out.println("! ! ! Победил второй игрок ! ! !");
-            player = false;
-        }
+        String game = !player ? "! ! ! Победил первый игрок ! ! !" : "! ! ! Победил второй игрок ! ! !";
+        System.out.println(game);
     }
 }
 
