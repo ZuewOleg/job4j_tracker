@@ -18,14 +18,15 @@ public class StartUI {
                 tracker.add(item);
             } else if (select == 1) {
                 Item[] items = tracker.findAll();
-                System.out.println(items);
+                for (Item index : items) {
+                    System.out.println(index);
+                }
             } else if (select == 2) {
                 System.out.println("Enter id : ");
                 int id = scanner.nextInt();
                 System.out.println("Enter name : ");
                 String name1 = scanner.nextLine();
                 Item item = new Item(name1);
-                tracker.replace(id, item);
                 if (tracker.replace(id, item)) {
                     System.out.println("replacement was successful");
                 } else {
@@ -35,7 +36,6 @@ public class StartUI {
             } else if (select == 3) {
                 System.out.println("Enter id : ");
                 int id = scanner.nextInt();
-                tracker.delete(id);
                 if (tracker.delete(id)) {
                     System.out.println("deletion was successful");
                 } else {
@@ -57,7 +57,9 @@ public class StartUI {
                 String name = scanner.nextLine();
                 Item[] items = tracker.findByName(name);
                 if (items.length > 0) {
-                    System.out.println(items);
+                    for (Item index1 : items) {
+                        System.out.println(index1);
+                    }
                 } else {
                     System.out.println("Applications with this name were not found");
                 }
