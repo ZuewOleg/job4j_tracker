@@ -38,13 +38,19 @@ public class Matches {
                         }
                         System.out.println("Осталось спичек: " + match);
                     }
-                    if (match <= 0) {
+                    if (match == 0) {
                         if (!player) {
-                            System.out.println("Победил первый игрок");
-                            break;
+                            System.out.println("! ! ! Победил первый игрок ! ! !");
+                            System.out.println();
+                            System.out.println("Сыграем еще?");
+                            System.out.println();
+                            game = false;
                         } else {
-                            System.out.println("Победил второй игрок");
-                            break;
+                            System.out.println("! ! ! Победил второй игрок ! ! !");
+                            System.out.println();
+                            System.out.println("=== Сыграем еще? ===");
+                            System.out.println();
+                            game = false;
                         }
                     }
                 }
