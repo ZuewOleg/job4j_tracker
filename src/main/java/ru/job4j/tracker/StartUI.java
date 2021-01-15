@@ -40,7 +40,6 @@ public class StartUI {
 
     public static void findIdItem (Input input, Tracker tracker) {
         int id = input.askInt("Enter id : ");
-        tracker.findById(id);
         Item item = tracker.findById(id);
         if (item != null) {
             System.out.println(id);
