@@ -1,9 +1,15 @@
 package ru.job4j.tracker;
 
 public class AddAction implements UserAction {
+    private final Output out;
+
+    public AddAction(Output out) {
+        this.out = out;
+    }
+
     @Override
     public String name() {
-        return "1. Show all items";
+        return "Show all items";
     }
 
     @Override
