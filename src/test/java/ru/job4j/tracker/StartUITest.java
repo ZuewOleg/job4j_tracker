@@ -27,7 +27,7 @@ public class StartUITest {
         };
         StartUI.replaceItem(new StubInput(answers), tracker);
         Item replaced = tracker.findById(item.getId());
-        assertThat(replaced, is("replaced item"));
+        assertThat(replaced.getName(), is("replaced item"));
     }
 
     @Test
@@ -38,6 +38,6 @@ public class StartUITest {
         String[] answers = {String.valueOf(item.getId()), "deleted item"};
         StartUI.deleteItem(new StubInput(answers), tracker);
         Item deleted = tracker.findById(item.getId());
-        assertThat(deleted, is("null"));
+        assertNull(deleted);
     }
 }

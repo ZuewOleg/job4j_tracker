@@ -5,9 +5,12 @@ public class Item {
 
     private String name;
 
-    public Item(int id, String name) {
-        this.id = id;
+    public Item(String name) {
         this.name = name;
+    }
+
+    public Item(int id) {
+        this.id = id;
     }
 
     public int getId() {
