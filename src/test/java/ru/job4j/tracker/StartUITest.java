@@ -72,7 +72,14 @@ public class StartUITest {
                new ExitAction(out)
        };
        new StartUI(out).init(in, tracker, actions);
-       assertThat(tracker.findAll(), is(item));
+       assertThat(out.toString(), is(
+               "Menu." + System.lineSeparator() +
+                       "0. Show all items" + System.lineSeparator() +
+                       "1. Exit Program" + System.lineSeparator() +
+                       "Menu." + System.lineSeparator() +
+                       "0. Show all items" + System.lineSeparator() +
+                       "1. Exit Program" + System.lineSeparator()
+       ));
    }
 
    @Test
@@ -88,7 +95,16 @@ public class StartUITest {
                new ExitAction(out)
        };
        new StartUI(out).init(in, tracker, actions);
-       assertThat(tracker.findByName("Oleg"), is(items));
+       assertThat(out.toString(), is(
+               "Menu." + System.lineSeparator() +
+                       "0. Find items by name" + System.lineSeparator() +
+                       "1. Exit Program" + System.lineSeparator() +
+                       "Applications with this name were not found" +
+                       System.lineSeparator() +
+                       "Menu." + System.lineSeparator() +
+                       "0. Find items by name" + System.lineSeparator() +
+                       "1. Exit Program" + System.lineSeparator()
+       ));
    }
 
    @Test
@@ -104,7 +120,15 @@ public class StartUITest {
                new ExitAction(out)
        };
        new StartUI(out).init(in, tracker, actions);
-       assertThat(tracker.findById(item.getId()), is(item));
+       assertThat(out.toString(), is(
+               "Menu." + System.lineSeparator() +
+                       "0. Find item by Id" + System.lineSeparator() +
+                       "1. Exit Program" + System.lineSeparator() +
+                       (item.getId()) + System.lineSeparator() +
+                       "Menu." + System.lineSeparator() +
+                       "0. Find item by Id" + System.lineSeparator() +
+                       "1. Exit Program" + System.lineSeparator()
+       ));
    }
 
    @Test
