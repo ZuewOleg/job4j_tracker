@@ -16,7 +16,7 @@ public class AddAction implements UserAction {
     public boolean execute(Input input, Tracker tracker) {
         Item[] items = tracker.findAll();
         for (Item index : items) {
-            System.out.println(index);
+            out.println(index);
         }
         return true;
     }

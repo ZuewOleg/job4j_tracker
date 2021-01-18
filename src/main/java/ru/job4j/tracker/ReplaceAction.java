@@ -18,9 +18,9 @@ public class ReplaceAction implements UserAction {
         String name = input.askStr("Enter name : ");
         Item item = new Item(name);
         if (tracker.replace(id, item)) {
-            System.out.println("replacement was successful");
+            out.println("replacement was successful");
         } else {
-            System.out.println("! ERROR ! element replacement is not implemented. " +
+            out.println("! ERROR ! element replacement is not implemented. " +
                     "perhaps an element with this id does not exist. try again.");
         }
         return true;
