@@ -6,10 +6,10 @@ import static org.junit.Assert.assertThat;
 
 public class FactTest {
 
-    @Test
+    @Test(expected = IllegalArgumentException.class)
     public void whetFactorial7to5040() {
-        int rsl = Fact.calc(7);
-        assertThat(rsl, is (5040));
+        int rsl = Fact.calc(-1);
+        assertThat(rsl, is ("Factorial is defined only for natural numbers and zero"));
     }
 
 }
