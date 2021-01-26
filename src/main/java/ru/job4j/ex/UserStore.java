@@ -7,9 +7,10 @@ public class UserStore {
         for (int i = 0; i < users.length; i++) {
             if (login.equals(users[i].getUsername())) {
                 rsl = users[i];
+                break;
             }
         }
-        if ((rsl.equals(login))) {
+        if (rsl.equals(null)) {
             throw new UserNotFoundException("User not found");
         }
         return rsl;
@@ -24,15 +25,16 @@ public class UserStore {
 
     public static void main(String[] args) {
         User[] users = {
-                new User("ABC", true),
+                new User("AB", true),
                 new User("First", true),
                 new User("Oleg", true)
         };
         try {
-            User user = findUser(users, "ooo");
+            User user = findUser(users, "12345");
             if (validate(user)) {
                 System.out.println("This user has an access");
             }
+            System.out.println("This user has an access");
         } catch (Exception e) {
             e.printStackTrace();
         }
