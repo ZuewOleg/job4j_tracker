@@ -19,7 +19,8 @@ public final class Tracker {
     }
 
     public Item add(Item item) {
-        items[ids++] = item;
+        item.setId(ids++);
+        items[size++] = item;
         return item;
     }
 
