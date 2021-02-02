@@ -7,9 +7,8 @@ import java.util.List;
 public final class Tracker {
     private static Tracker instance = null;
 
-    private final ArrayList<Item> items = new ArrayList<>(100);
+    private final List<Item> items = new ArrayList<>(100);
     private int ids = 1;
-    private int size = 0;
 
     private Tracker() {}
 
@@ -26,21 +25,20 @@ public final class Tracker {
         return item;
     }
 
-    public Item findAll() {
-        return items.get(size);
+    public List<Item> findAll() {
+        return items;
     }
 
-    public ArrayList<Item> findByName(String key) {
-        ArrayList<Item> keysWithoutNull = new ArrayList<>(items);
+    public List<Item> findByName(String key) {
+        List<Item> keysWithoutNull = new ArrayList<>();
         int a = 0;
-        for (int index = 0; index < size; index++) {
+        for (int index = 0; index < items.size(); index++) {
             Item item = items.get(index);
             if (item.getName().equals(key)) {
-                keysWithoutNull.add(a) = item;
-                a++;
+                keysWithoutNull = items;
             }
         }
-        return Arrays.copyOf(keysWithoutNull, a);
+        return items;
     }
 
     public Item findById(int id) {
@@ -52,7 +50,7 @@ public final class Tracker {
 
     private int indexOf(int id) {
         int rsl = -1;
-        for (int index = 0; index < size; index++) {
+        for (int index = 0; index < items.size(); index++) {
             if (items.get(index).getId() == id) {
                 rsl = index;
                 break;
@@ -66,7 +64,7 @@ public final class Tracker {
         boolean rsl = index != -1;
         if (rsl) {
             item.setId(id);
-            items.add(index) = item;
+            items.set(index, item);
         }
         return rsl;
     }
@@ -75,9 +73,7 @@ public final class Tracker {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            System.arraycopy(items, index + 1, items, index, size - index);
-            items.add(size - 1) = null;
-            size--;
+            items.remove(index);
         }
         return rsl;
     }
