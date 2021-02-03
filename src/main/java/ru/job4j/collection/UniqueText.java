@@ -10,14 +10,12 @@ public class UniqueText {
         HashSet<String> check = new HashSet<>();
         for (String originals : origin) { /* for-each origin -> new HashSet. */
             check.add(originals);
-                for (String texts : text) {/* for-each text -> hashSet.contains */
-                    if (check.contains(texts)) {
-                        rsl = true;
-                    } else {
-                        rsl = false;
-                    }
-                }
+        }
+        for (String texts : text) { /* for-each text -> hashSet.contains */
+            if (!check.contains(texts)) {
+                rsl = false;
             }
+        }
         return rsl;
     }
 }
