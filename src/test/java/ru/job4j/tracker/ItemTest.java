@@ -18,7 +18,7 @@ public class ItemTest {
                 new Item(2),
                 new Item(5)
         );
-        Collections.sort(items);
+        Collections.sort(items, new SortByIdItemUp());
         List<Item> expect = Arrays.asList(
                 new Item(2),
                 new Item(5),
@@ -50,7 +50,7 @@ public class ItemTest {
                 new Item(2),
                 new Item(5)
         );
-        Collections.sort(items, Collections.reverseOrder());
+        Collections.sort(items, new SortByIdItemDown());
         List<Item> expect = Arrays.asList(
                 new Item(6),
                 new Item(5),
