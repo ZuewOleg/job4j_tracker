@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class ItemTest {
 
     @Test
-    public void compareTo() {
+    public void compareToUp() {
         List<Item> items = Arrays.asList(
                 new Item(6),
                 new Item(2),
@@ -39,6 +39,22 @@ public class ItemTest {
                 new Item("Ivan"),
                 new Item("Oleg"),
                 new Item("Petr")
+        );
+        assertThat(items, is(expect));
+    }
+
+    @Test
+    public void compareToDown() {
+        List<Item> items = Arrays.asList(
+                new Item(6),
+                new Item(2),
+                new Item(5)
+        );
+        Collections.sort(items, Collections.reverseOrder());
+        List<Item> expect = Arrays.asList(
+                new Item(6),
+                new Item(5),
+                new Item(2)
         );
         assertThat(items, is(expect));
     }
