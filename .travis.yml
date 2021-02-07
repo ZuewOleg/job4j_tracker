@@ -10,14 +10,15 @@ sudo: false
 # Здесь используется сторонний сервис https://codecov.io/
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-env:
-  global:
-    - CODECOV_TOKEN="73900031-e551-49ce-8c76-03d921e0fb07"
 
-# Отправлять уведомление на почту youremail@smtp.ru(Изменить на свою) если сборка упала
+# Отправлять уведомление на почту zuev_17@bk.ru если сборка упала
 notifications:
   email:
     recipients:
       - zuev_17@bk.ru
     on_success: never # default: change
     on_failure: always # default: always
+
+env:
+  global:
+    - CODECOV_TOKEN="73900031-e551-49ce-8c76-03d921e0fb07"
