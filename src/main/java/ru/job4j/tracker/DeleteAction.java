@@ -18,7 +18,8 @@ public class DeleteAction implements UserAction {
         if (tracker.delete(id)) {
             out.println("deletion was successful");
         } else {
-            out.println("! ERROR ! element deletion is not implemented. " +
+            out.println("! ERROR ! element deletion is not implemented. "
+                    +
                     "perhaps an element with this id does not exist. try again.");
         }
         return true;

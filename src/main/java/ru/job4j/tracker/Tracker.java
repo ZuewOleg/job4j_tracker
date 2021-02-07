@@ -10,7 +10,8 @@ public final class Tracker {
     private final List<Item> items = new ArrayList<>(100);
     private int ids = 1;
 
-    private Tracker() {}
+    private Tracker() {
+    }
 
     public static Tracker getInstance() {
         if (instance == null) {
@@ -30,15 +31,17 @@ public final class Tracker {
     }
 
     public List<Item> findByName(String key) {
-        List<Item> keysWithoutNull = new ArrayList<>();
+        List<Item> keysWithoutNull = new ArrayList<>(items.size());
         int a = 0;
         for (int index = 0; index < items.size(); index++) {
             Item item = items.get(index);
             if (item.getName().equals(key)) {
-                keysWithoutNull = items;
+                keysWithoutNull.add(item);
+                a++;
+
             }
         }
-        return items;
+        return keysWithoutNull;
     }
 
     public Item findById(int id) {

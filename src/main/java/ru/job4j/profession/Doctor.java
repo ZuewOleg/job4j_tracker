@@ -4,7 +4,8 @@ public class Doctor extends Profession {
     private Diagnosis diagnosis;
     private Reception reception;
 
-    public Doctor(String name, String surname, String education, String birthday, Diagnosis diagnosis, Reception reception) {
+    public Doctor(String name, String surname, String education, String birthday,
+                  Diagnosis diagnosis, Reception reception) {
         super(name, surname, education, birthday);
         this.diagnosis = diagnosis;
         this.reception = reception;

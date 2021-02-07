@@ -10,7 +10,8 @@ public class Matches {
         System.out.println("=== Игра 11 спичек ===");
             while (match > 0) {
                 String name = player ? "первого" : "второго";
-                System.out.println("Можно взять от 1 до 3 спичек." + System.lineSeparator() + " Ход " + name + " игрока!");
+                System.out.println("Можно взять от 1 до 3 спичек." + System.lineSeparator()
+                        + " Ход " + name + " игрока!");
                 int user = Integer.valueOf(input.nextLine());
                 player = !player;
                 if (user < 1 || user > 3) {
@@ -21,7 +22,7 @@ public class Matches {
                 }
                 System.out.println("Осталось спичек: " + match);
             }
-        String game = !player ? "! ! ! Победил первый игрок ! ! !" : "! ! ! Победил второй игрок ! ! !";
+        String game = !player ? "! ! Победил первый игрок ! !" : "! ! Победил второй игрок ! !";
         System.out.println(game);
     }
 }

@@ -10,8 +10,10 @@ public class College {
         student.setReceipt(new Date());
 
         System.out.println(
-                "Information about the student:" + System.lineSeparator() + "Name - " +
-                student.getName() + System.lineSeparator() + "Group - " + student.getGroup() +
+                "Information about the student:" + System.lineSeparator() + "Name - "
+                        +
+                student.getName() + System.lineSeparator() + "Group - " + student.getGroup()
+                        +
                 System.lineSeparator() + "Date receipt - " + student.getReceipt()
         );
     }

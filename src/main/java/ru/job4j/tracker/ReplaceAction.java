@@ -20,7 +20,8 @@ public class ReplaceAction implements UserAction {
         if (tracker.replace(id, item)) {
             out.println("replacement was successful");
         } else {
-            out.println("! ERROR ! element replacement is not implemented. " +
+            out.println("! ERROR ! element replacement is not implemented. "
+                    +
                     "perhaps an element with this id does not exist. try again.");
         }
         return true;

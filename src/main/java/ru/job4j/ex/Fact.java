@@ -3,7 +3,9 @@ package ru.job4j.ex;
 public class Fact {
     public static int calc(int n) {
         if (n < 0) {
-            throw new IllegalArgumentException("Factorial is defined only for natural numbers and zero");
+            throw new IllegalArgumentException("Factorial is defined only "
+                    +
+                    "for natural numbers and zero");
         }
         int rsl = 1;
         for (int index = 1; index <= n; index++) {
