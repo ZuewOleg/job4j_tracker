@@ -11,11 +11,13 @@ public class LexSortTest {
         String[] input = {
                 "10. Task.",
                 "1. Task.",
-                "2. Task."
+                "2. Task.",
+                "3. Task"
         };
         String[] out = {
                 "1. Task.",
                 "2. Task.",
+                "3. Task",
                 "10. Task."
         };
         Arrays.sort(input, new LexSort());
