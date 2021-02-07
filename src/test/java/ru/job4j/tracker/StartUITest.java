@@ -79,7 +79,7 @@ public class StartUITest {
                "Menu." + System.lineSeparator()
                        + "0. Show all items" + System.lineSeparator()
                        + "1. Exit Program" + System.lineSeparator()
-                       + items.get(0) + System.lineSeparator()
+                       + tracker.findAll() + System.lineSeparator()
                        + "Menu."
                        + System.lineSeparator()
                        + "0. Show all items" + System.lineSeparator()
