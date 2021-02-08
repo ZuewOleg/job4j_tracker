@@ -21,7 +21,7 @@ public class BankService {
      * добавить пользователя в систему, если он есть, то нового добавлять не надо
      */
     public void addUser(User user) {
-        users.putIfAbsent(user, new ArrayList<Account>());
+        users.putIfAbsent(user, new ArrayList<>());
     }
 
     /**
@@ -57,7 +57,8 @@ public class BankService {
 
     /**
      *
-     * @return осуществляет поиск счета по реквизитам, для запрашиваемого пользователя(поиск по паспорту)
+     * @return осуществляет поиск счета по реквизитам,
+     * для запрашиваемого пользователя(поиск по паспорту)
      */
     public Account findByRequisite(String passport, String requisite) {
         Account rsl = null;
@@ -82,7 +83,8 @@ public class BankService {
      * @param destRequisite реквизиты получателя
      * @param amount сумма перевода
      * @return метод возвращает вероятность перевода денежных средств,
-     * с условиям того, что данные счета существуют и с переводимого счета хватает денежных средств для перевода
+     * с условиям того, что данные счета существуют и с переводимого
+     * счета хватает денежных средств для перевода
      */
     public boolean transferMoney(String srcPassport, String srcRequisite,
                                  String destPassport, String destRequisite, double amount) {
