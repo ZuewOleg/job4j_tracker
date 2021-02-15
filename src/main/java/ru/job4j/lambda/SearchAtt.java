@@ -16,17 +16,12 @@ public class SearchAtt {
     }
 
     public static List<Attachment> filterSize(List<Attachment> list) {
-        for (Attachment a : list) {
             Predicate<Attachment> func = a -> a.getName().contains("bug");
-        }
+        return loop(list, func);
     }
 
     public static List<Attachment> filterName(List<Attachment> list) {
-        for (Attachment a : list) {
             Predicate<Attachment> func = a -> a.getSize() > 100;
-        }
-    }
-
-    return loop(list, func);
+        return loop(list, func);
     }
 }
