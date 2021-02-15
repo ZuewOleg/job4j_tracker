@@ -8,26 +8,21 @@ public class SearchAtt {
     public static List<Attachment> loop(List<Attachment> list, Predicate<List<Attachment>> func) {
         List<Attachment> rsl = new ArrayList<>();
         for (Attachment att : list) {
-            if (func.test(list)) {
+            if (func.test(att)) {
                 rsl.add(att);
             }
         }
         return rsl;
     }
 
-    public static List<Attachment> filterSizeAndName(List<Attachment> list) {
-        Predicate<List<Attachment>> func = new Predicate<List<Attachment>>() {
-            @Override
-            public boolean test(List<Attachment> attachments) {
-                boolean rsl = false;
-                for (Attachment att : attachments) {
-                    if (att.getSize() > 100 && att.getName().contains("bug")) {
-                        rsl = true;
-                    }
-                }
-                return rsl;
-            }
-        };
-        return loop(list, func);
+    public static List<Attachment> filterSize(List<Attachment> list) {
+        Predicate<List<Attachment>> func = a -> a.getName().contains("bug");
+    }
+
+    public static List<Attachment> filterName(List<Attachment> list) {
+        Predicate<List<Attachment>> func = a -> a.getSize() > 100;
+    }
+
+    return loop(list, func);
     }
 }
