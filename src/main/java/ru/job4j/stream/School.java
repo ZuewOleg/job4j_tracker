@@ -11,4 +11,10 @@ public class School {
                 .collect(Collectors.toList());
         return rsl;
     }
+
+    public Map<String, Student> collectToMap(List<Student> students) {
+        return students.stream()
+                .distinct()
+                .collect(Collectors.toMap(e -> e.getSurname(), e -> e));
+    }
 }
