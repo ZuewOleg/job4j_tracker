@@ -19,6 +19,7 @@ public class StreamInteger {
                     + '}';
         }
     }
+
     public static void main(String[] args) {
         ArrayList<Integer> numbers = new ArrayList<>();
                 numbers.add(new Integer(2));
