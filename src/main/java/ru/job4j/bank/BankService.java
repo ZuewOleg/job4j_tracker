@@ -43,36 +43,32 @@ public class BankService {
      * метод @findByPassport ищет пользователя по номеру паспорта
      *  осуществляет поиск пользователя по паспорту
      * @return осуществляет поиск пользователя по паспорта
+     * применение stream находится ru.job4j.map.College.findByAccount
      */
     public User findByPassport(String passport) {
-        User rsl = null;
-        for (User key : users.keySet()) {
-            if (key.getPassport().equals(passport)) {
-                rsl = key;
-                break;
-            }
-        }
-        return rsl;
+        return users.keySet()
+                .stream()
+                .filter(u -> u.getPassport().equals(passport))
+                .findFirst()
+                .orElse(null);
     }
 
     /**
      *
      * @return осуществляет поиск счета по реквизитам,
      * для запрашиваемого пользователя(поиск по паспорту)
+     * применение stream находится ru.job4j.map.College.findBySubjectName
      */
     public Account findByRequisite(String passport, String requisite) {
-        Account rsl = null;
         User user = findByPassport(passport);
         if (user != null) {
-            List<Account> accounts = users.get(user);
-            for (Account a : accounts) {
-                if (a.getRequisite().equals(requisite)) {
-                    rsl = a;
-                    break;
-                }
-            }
+            return users.get(user)
+                    .stream()
+                    .filter(u -> u.getRequisite().equals(requisite))
+                    .findFirst()
+                    .orElse(null);
         }
-        return rsl;
+        return null;
     }
 
     /**
