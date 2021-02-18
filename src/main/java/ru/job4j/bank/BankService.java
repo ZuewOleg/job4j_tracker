@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Класс описывает работу сервиса банка: срегистрация пользователя, регистрация счета,
@@ -47,14 +48,11 @@ public class BankService {
      * применение stream находится ru.job4j.map.College.findByAccount
      */
     public Optional<User> findByPassport(String passport) {
-        Optional<User> rsl = Optional.empty();
-        for (User user : users.keySet()) {
-            if (user.getPassport().equals(passport)) {
-                rsl = Optional.of(user);
-                break;
-            }
-        }
-        return rsl;
+        return users.keySet()
+                .stream()
+                .flatMap(Stream::ofNullable)
+                .filter(u -> u.getPassport().equals(passport))
+                .findFirst();
     }
 
     /**
@@ -64,17 +62,14 @@ public class BankService {
      * применение stream находится ru.job4j.map.College.findBySubjectName
      */
     public Optional<Account> findByRequisite(String passport, String requisite) {
-        Optional<Account> rsl = Optional.empty();
         Optional<User> user = findByPassport(passport);
+        Optional<Account> rsl = Optional.empty();
         if (user.isPresent()) {
-            List<Account> accounts = users.get(user.get());
-            for (Account a : accounts) {
-                if (a.getRequisite().equals(requisite)){
-                    rsl = Optional.of(a);
-                    break;
+            rsl = users.get(user.get())
+                    .stream()
+                    .filter(u -> u.getRequisite().equals(requisite))
+                    .findFirst();
                 }
-            }
-        }
         return rsl;
     }
 
