@@ -16,7 +16,6 @@ public class Car {
         private String transmission;
         private int powerhorse;
 
-
         Builder buildMarka(String marka) {
             this.marka = marka;
             return this;
