@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Класс описывает работу сервиса банка: срегистрация пользователя, регистрация счета,
@@ -30,8 +31,8 @@ public class BankService {
      * @param account осуществляет поиск счета пользователя, если его нет, то добавляет к нему новый
      */
     public void addAccount(String passport, Account account) {
-        User user = findByPassport(passport);
-        if (user != null) {
+        Optional<User> user = findByPassport(passport);
+        if (user.isPresent()) {
             List<Account> userAccount = users.get(user);
                 if (!userAccount.contains(account)) {
                     userAccount.add(account);
@@ -45,12 +46,15 @@ public class BankService {
      * @return осуществляет поиск пользователя по паспорта
      * применение stream находится ru.job4j.map.College.findByAccount
      */
-    public User findByPassport(String passport) {
-        return users.keySet()
-                .stream()
-                .filter(u -> u.getPassport().equals(passport))
-                .findFirst()
-                .orElse(null);
+    public Optional<User> findByPassport(String passport) {
+        Optional<User> rsl = Optional.empty();
+        for (User user : users.keySet()) {
+            if (user.getPassport().equals(passport)) {
+                rsl = Optional.of(user);
+                break;
+            }
+        }
+        return rsl;
     }
 
     /**
@@ -59,16 +63,18 @@ public class BankService {
      * для запрашиваемого пользователя(поиск по паспорту)
      * применение stream находится ru.job4j.map.College.findBySubjectName
      */
-    public Account findByRequisite(String passport, String requisite) {
-        User user = findByPassport(passport);
-        if (user != null) {
-            return users.get(user)
-                    .stream()
-                    .filter(u -> u.getRequisite().equals(requisite))
-                    .findFirst()
-                    .orElse(null);
+    public Optional<Account> findByRequisite(String passport, String requisite) {
+        Optional<Account> rsl = Optional.empty();
+        Optional<User> user = findByPassport(passport);
+        if (user.isPresent()) {
+            List<Account> accounts = users.get(user);
+            for (Account a : accounts) {
+                if (a.getRequisite().contains(requisite)){
+                    rsl = Optional.of(a);
+                }
+            }
         }
-        return null;
+        return rsl;
     }
 
     /**
@@ -82,16 +88,17 @@ public class BankService {
      * с условиям того, что данные счета существуют и с переводимого
      * счета хватает денежных средств для перевода
      */
-    public boolean transferMoney(String srcPassport, String srcRequisite,
-                                 String destPassport, String destRequisite, double amount) {
-        boolean rsl = false;
-        Account srcAccount = findByRequisite(srcPassport, srcRequisite);
-        Account destAccount = findByRequisite(destPassport, destRequisite);
-        if (srcAccount != null && destAccount != null && srcAccount.getBalance() >= amount) {
-            srcAccount.setBalance(srcAccount.getBalance() - amount);
-            destAccount.setBalance(destAccount.getBalance() + amount);
-            rsl = true;
+        public boolean transferMoney(String srcPassport, String srcRequisite,
+                String destPassport, String destRequisite, double amount) {
+            boolean rsl = false;
+            Optional<Account> srcAccount = findByRequisite(srcPassport, srcRequisite);
+            Optional<Account> destAccount = findByRequisite(destPassport, destRequisite);
+            if (srcAccount.isPresent() && destAccount.isPresent()
+                    && srcAccount.get().getBalance() >= amount) {
+                srcAccount.get().setBalance(srcAccount.get().getBalance() - amount);
+                destAccount.get().setBalance(destAccount.get().getBalance() + amount);
+                rsl = true;
+            }
+            return rsl;
         }
-        return rsl;
-    }
 }
