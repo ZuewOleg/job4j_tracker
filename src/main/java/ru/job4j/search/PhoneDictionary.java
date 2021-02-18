@@ -18,7 +18,7 @@ public class PhoneDictionary {
 
     public ArrayList<Person> find(String key, Predicate<Person> combine) {
             ArrayList<Person> result = new ArrayList<>();
-            for (Person person : persons) {
+            for (var person : persons) {
                 if (combine.test(person)) {
                     result.add(person);
                 }
