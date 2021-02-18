@@ -31,9 +31,9 @@ public class BankService {
      * @param account осуществляет поиск счета пользователя, если его нет, то добавляет к нему новый
      */
     public void addAccount(String passport, Account account) {
-        Optional<User> user = findByPassport(passport);
+        Optional<User> user = Optional.empty();
         if (user.isPresent()) {
-            List<Account> userAccount = users.get(user);
+            List<Account> userAccount = users.get(user.get());
                 if (!userAccount.contains(account)) {
                     userAccount.add(account);
                 }
@@ -67,10 +67,11 @@ public class BankService {
         Optional<Account> rsl = Optional.empty();
         Optional<User> user = findByPassport(passport);
         if (user.isPresent()) {
-            List<Account> accounts = users.get(user);
+            List<Account> accounts = users.get(user.get());
             for (Account a : accounts) {
-                if (a.getRequisite().contains(requisite)){
+                if (a.getRequisite().equals(requisite)){
                     rsl = Optional.of(a);
+                    break;
                 }
             }
         }
