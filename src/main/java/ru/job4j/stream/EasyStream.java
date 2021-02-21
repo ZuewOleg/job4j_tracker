@@ -15,9 +15,8 @@ public class EasyStream {
     /**  приватный конструктор, который будет инициализзировать поле
      * и соответсвенно с его помощью мы будем писать значение в наше добавленное поле
      */
-    private EasyStream stream(List<Integer> stream) {
+    private EasyStream(List<Integer> stream) {
         this.stream = stream;
-        return this;
     }
 
     @Override
@@ -31,38 +30,33 @@ public class EasyStream {
 
     /** of - получает исходные данные */
     public static EasyStream of(List<Integer> source) {
-          EasyStream easyStream = new EasyStream().stream(source);
+          EasyStream easyStream = new EasyStream(source);
         return easyStream;
     }
 
     /** map - преобразует число в другое число */
     public EasyStream map(Function<Integer, Integer> fun) {
-        EasyStream rsl = new EasyStream();
+        List<Integer> rsl = new ArrayList<>();
         for (var st : stream) {
-            stream.add(fun.apply(st));
-                rsl = new EasyStream().stream(stream);
+            rsl.add(fun.apply(st));
+
             }
-        return rsl;
+        return new EasyStream(rsl);
     }
 
     /** filter - фильтрует поток элементов */
     public EasyStream filter(Predicate<Integer> fun) {
-        EasyStream rsl = new EasyStream();
+        List<Integer> rsl = new ArrayList<>();
         for (var st : stream) {
             if (fun.test(st)) {
-                stream.add(st);
+                rsl.add(st);
             }
-            rsl = new EasyStream().stream(stream);
         }
-        return rsl;
+        return new EasyStream(rsl);
     }
 
     /** collect - собирает все элементы из source по заданным условиям map и filter */
     public List<Integer> collect() {
-        List<Integer> rsl = new ArrayList<>();
-        for (var s : stream) {
-            rsl.add(s);
-        }
-        return rsl;
+        return stream;
     }
 }
