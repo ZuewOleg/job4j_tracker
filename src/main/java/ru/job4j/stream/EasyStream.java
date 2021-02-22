@@ -10,7 +10,8 @@ public class EasyStream {
     private List<Integer> stream;
 
     /** чтобы запретить создание объектов класса вне этого класса */
-    private EasyStream() {}
+    private EasyStream() {
+    }
 
     /**  приватный конструктор, который будет инициализзировать поле
      * и соответсвенно с его помощью мы будем писать значение в наше добавленное поле
@@ -19,19 +20,9 @@ public class EasyStream {
         this.stream = stream;
     }
 
-    @Override
-    public String toString() {
-        return "EasyStream{"
-                +
-                "stream=" + stream
-                +
-                '}';
-    }
-
     /** of - получает исходные данные */
     public static EasyStream of(List<Integer> source) {
-          EasyStream easyStream = new EasyStream(source);
-        return easyStream;
+          return new EasyStream(source);
     }
 
     /** map - преобразует число в другое число */
