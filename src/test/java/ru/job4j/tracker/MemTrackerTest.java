@@ -5,10 +5,10 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.core.IsNull.nullValue;
 
-public class TrackerTest {
+public class MemTrackerTest {
     @Test
     public void whenReplace() {
-        Tracker tracker = Tracker.getInstance();
+        MemTracker tracker = MemTracker.getInstance();
         Item bug = new Item(2);
         bug.setName("Bug");
         tracker.add(bug);
@@ -21,7 +21,7 @@ public class TrackerTest {
 
     @Test
     public void whenDelete() {
-        Tracker tracker = Tracker.getInstance();
+        MemTracker tracker = MemTracker.getInstance();
         Item bug = new Item(2);
         bug.setName("Bug");
         tracker.add(bug);
