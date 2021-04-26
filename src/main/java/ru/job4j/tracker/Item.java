@@ -7,13 +7,20 @@ public class Item implements Comparable<Item> {
 
     private String name;
 
+    public Item(int id) {
+        this.id = id;
+    }
+
     public Item(String name) {
         this.name = name;
     }
 
-    public Item(int id) {
+    public Item(int id, String name) {
         this.id = id;
+        this.name = name;
     }
+
+
 
     public int getId() {
         return id;

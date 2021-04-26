@@ -15,7 +15,7 @@ public class AddAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Tracker tracker) {
+    public boolean execute(Input input, Store tracker) {
         List<Item> items = tracker.findAll();
         for (Object index : items) {
             out.println(index);
