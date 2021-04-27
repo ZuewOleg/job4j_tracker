@@ -1,5 +1,6 @@
 package ru.job4j.tracker;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class AddAction implements UserAction {
@@ -15,7 +16,7 @@ public class AddAction implements UserAction {
     }
 
     @Override
-    public boolean execute(Input input, Store tracker) {
+    public boolean execute(Input input, Store tracker) throws SQLException {
         List<Item> items = tracker.findAll();
         for (Object index : items) {
             out.println(index);

@@ -33,52 +33,81 @@ public class SqlTracker implements Store {
 
     @Override
     public Item add(Item item) {
-        Item rsl = null;
-        String sql = String.format("insert into items (name) values ('%s');", item.getName());
-        if (executeQuery(sql)) {
-            rsl = item;
+        try (PreparedStatement statement =
+                     cn.prepareStatement("insert into items(name) values (?)",
+                             Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(1, item.getName());
+            statement.execute();
+            try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    item.setId(generatedKeys.getInt(1));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return rsl;
+        return item;
     }
 
     @Override
     public boolean replace(int id, Item item) {
-        String sql = String.format("update items set name='%s' where id=%s;", item.getName(), id);
-        return executeQuery(sql);
+        boolean result = false;
+        try (PreparedStatement statement =
+                     cn.prepareStatement("update items set name = ? where id = ?")) {
+            statement.setString(1, item.getName());
+            statement.setInt(3, item.getId());
+            result = statement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
     public boolean delete(int id) {
-        String sql = String.format("delete from items where id='%s';", id);
-        return executeQuery(sql);
+        boolean result = false;
+        try (PreparedStatement statement =
+                     cn.prepareStatement("delete from items where id = ?")) {
+            statement.setInt(1, id);
+            result = statement.executeUpdate() > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 
     @Override
     public List<Item> findAll() {
-        List<Item> listItems = new ArrayList<>();
-        String query = "select * from items;";
-        ResultSet rs = executeQueryWithResultSet(query);
-        try {
-            while (rs.next()) {
-                listItems.add(new Item(rs.getInt("id"), rs.getString("name")));
+        List<Item> items = new ArrayList<>();
+        try (PreparedStatement statement = cn.prepareStatement("select * from items")) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    items.add(new Item(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name")
+                    ));
+                }
             }
-        } catch (SQLException se) {
-            se.fillInStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return listItems;
+        return items;
     }
 
     @Override
     public List<Item> findByName(String key) {
         List<Item> rsl = new ArrayList<>();
-        String query = String.format("select * from items where name='%s';", key);
-        ResultSet rs = executeQueryWithResultSet(query);
-        try {
-            while (rs.next()) {
-                rsl.add(new Item(rs.getInt("id"), rs.getString("name")));
+        try (PreparedStatement statement = cn.prepareStatement("select * from items where name='%s';" + key)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    rsl.add(new Item(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name")
+                    ));
+                }
             }
-        } catch (SQLException se) {
-            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return rsl;
     }
@@ -86,37 +115,14 @@ public class SqlTracker implements Store {
     @Override
     public Item findById(int id) {
         Item rsl = null;
-        String query = String.format("select * from items where id='%s';", id);
-        ResultSet rs = executeQueryWithResultSet(query);
-        try {
-            rs.next();
-            rsl = new Item(rs.getInt("id"), rs.getString("name"));
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-        return rsl;
-    }
-
-    private boolean executeQuery(String query) {
-        boolean rsl = false;
-        try (Statement st = cn.createStatement()) {
-            st.execute(query);
-            if (st.getUpdateCount() > 0) {
-                rsl =  true;
+        try (PreparedStatement statement = cn.prepareStatement("select * from items where id='%s';", id)) {
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    rsl = new Item(resultSet.getInt("id"), resultSet.getString("name"));
+                }
             }
-        } catch (SQLException se) {
-            se.printStackTrace();
-        }
-        return rsl;
-    }
-
-    private ResultSet executeQueryWithResultSet(String query) {
-        ResultSet rsl = null;
-        try (Statement st = cn.createStatement()) {
-            st.execute(query);
-            rsl = st.getResultSet();
-        } catch (SQLException se) {
-            se.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return rsl;
     }
