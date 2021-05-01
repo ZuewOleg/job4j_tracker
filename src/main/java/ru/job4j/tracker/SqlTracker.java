@@ -10,7 +10,8 @@ public class SqlTracker implements Store {
     private Connection cn;
 
     public void init() {
-        try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
+        try (InputStream in = SqlTracker.class.getClassLoader().
+                getResourceAsStream("app.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
@@ -55,7 +56,7 @@ public class SqlTracker implements Store {
         try (PreparedStatement statement =
                      cn.prepareStatement("update items set name = ? where id = ?")) {
             statement.setString(1, item.getName());
-            statement.setInt(3, item.getId());
+            statement.setInt(2, item.getId());
             result = statement.executeUpdate() > 0;
         } catch (Exception e) {
             e.printStackTrace();
@@ -97,7 +98,9 @@ public class SqlTracker implements Store {
     @Override
     public List<Item> findByName(String key) {
         List<Item> rsl = new ArrayList<>();
-        try (PreparedStatement statement = cn.prepareStatement("select * from items where name='%s';" + key)) {
+        try (PreparedStatement statement = cn.prepareStatement(
+                "select * from items where name = ?")) {
+            statement.setString(1, key);
             try (ResultSet resultSet = statement.executeQuery()) {
                 while (resultSet.next()) {
                     rsl.add(new Item(
@@ -115,10 +118,14 @@ public class SqlTracker implements Store {
     @Override
     public Item findById(int id) {
         Item rsl = null;
-        try (PreparedStatement statement = cn.prepareStatement("select * from items where id='%s';", id)) {
+        try (PreparedStatement statement = cn.prepareStatement(
+                "select * from items where id = ?")) {
+            statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    rsl = new Item(resultSet.getInt("id"), resultSet.getString("name"));
+                if (resultSet.next()) {
+                    rsl = new Item(resultSet.getInt("id"),
+                            resultSet.getString("name")
+                    );
                 }
             }
         } catch (Exception e) {
