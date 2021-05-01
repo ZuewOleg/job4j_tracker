@@ -1,4 +1,4 @@
-package ru.job4j.сertification;
+package ru.job4j.certification;
 
 public class Subject {
     private String name;

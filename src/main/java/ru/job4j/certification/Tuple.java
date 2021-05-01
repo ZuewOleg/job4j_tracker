@@ -1,4 +1,4 @@
-package ru.job4j.сertification;
+package ru.job4j.certification;
 
 import java.util.Objects;
 
@@ -36,10 +36,8 @@ public class Tuple {
     @Override
     public String toString() {
         return "Tuple{"
-                +
-                "name='" + name + '\''
-                +
-                ", score=" + score +
-                '}';
+                + "name='" + name + '\''
+                + ", score=" + score
+                + '}';
     }
 }

@@ -1,4 +1,4 @@
-package ru.job4j.сertification;
+package ru.job4j.certification;
 
 import java.util.Comparator;
 import java.util.List;

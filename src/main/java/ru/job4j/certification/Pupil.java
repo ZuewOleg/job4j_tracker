@@ -1,4 +1,4 @@
-package ru.job4j.сertification;
+package ru.job4j.certification;
 
 import java.util.List;
 
@@ -22,11 +22,8 @@ public class Pupil {
     @Override
     public String toString() {
         return "Pupil{"
-                +
-                "name='" + name + '\''
-                +
-                ", subjects=" + subjects
-                +
-                '}';
+                + "name='" + name + '\''
+                + ", subjects=" + subjects
+                + '}';
     }
 }
